@@ -37,24 +37,23 @@ $(window).resize(function() {
 	};
 })(jQuery);
 
-function timeElapse(date){
-	var current = Date();
-	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
-	var days = Math.floor(seconds / (3600 * 24));
-	seconds = seconds % (3600 * 24);
-	var hours = Math.floor(seconds / 3600);
-	if (hours < 10) {
-		hours = "0" + hours;
-	}
-	seconds = seconds % 3600;
-	var minutes = Math.floor(seconds / 60);
-	if (minutes < 10) {
-		minutes = "0" + minutes;
-	}
-	seconds = seconds % 60;
-	if (seconds < 10) {
-		seconds = "0" + seconds;
-	}
+function timeElapse(date1){
+	//var date1 =new Date('2021/2/19 13:18:00');
+	var date2 =new Date(); 
+	
+	var sec = date2.getTime() - date1.getTime();
+
+	var second = 1000, minute = 60 * second, hour = 60 * minute, day = 24 * hour;
+
+
+	var days = Math.floor(sec / day);
+	sec -= days * day;
+	var hours = Math.floor(sec / hour);
+	sec -= hours * hour;
+	var minutes = Math.floor(sec / minute);
+	sec -= minutes * minute;
+	var seconds = Math.floor(sec / second);
+	//document.getElementById("demo").innerHTML=(days + " 天" + (days != 1 ? "" : "") + ", " + hours + " 小时" + (hours != 1 ? "" : "") + ", " + minutes + " 分" + (minutes != 1 ? "" : "") + ", " + seconds + " 秒" + (seconds != 1 ? "" : ""));
 	var result = "第 <span class=\"digit\">" + days + "</span> 天 <span class=\"digit\">" + hours + "</span> 小时 <span class=\"digit\">" + minutes + "</span> 分钟 <span class=\"digit\">" + seconds + "</span> 秒"; 
 	$("#clock").html(result);
 }
